@@ -5,6 +5,9 @@
  - Wrote request handlers
  - Installed nodemon (npm i -g nodemon).
  - Installed postman and tested few APIs.
+ - Installed mongoose.
+ - Connected to cluster first and then database using mongoose.
+ - Pushed the data into data through post API.
 # Learnings:
  - Orders of routes matter.
  - HTTPs methods (GET,POST,PUT,PATCH,DELETE).
@@ -15,3 +18,6 @@
  - next functions and errors along with res.send()
  - Middlewares and error handling
  - How express is handling request behind the scene. 
+ - Always connect database to server before listing to port.
+ - js object vs json
+ - patch vs put
