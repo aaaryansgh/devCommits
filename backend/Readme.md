@@ -8,6 +8,7 @@
  - Installed mongoose.
  - Connected to cluster first and then database using mongoose.
  - Pushed the data into data through post API.
+ - Installed validator.js
 # Learnings:
  - Orders of routes matter.
  - HTTPs methods (GET,POST,PUT,PATCH,DELETE).
@@ -21,3 +22,5 @@
  - Always connect database to server before listing to port.
  - js object vs json
  - patch vs put
+ - Data validations using required,unique,true,minlength,custom validate function for gender.
+ - API level validation on Patch request
