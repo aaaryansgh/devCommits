@@ -9,6 +9,8 @@
  - Connected to cluster first and then database using mongoose.
  - Pushed the data into data through post API.
  - Installed validator.js
+ - validate data in signup API
+ - Installed bcrypt package
 # Learnings:
  - Orders of routes matter.
  - HTTPs methods (GET,POST,PUT,PATCH,DELETE).
@@ -23,4 +25,5 @@
  - js object vs json
  - patch vs put
  - Data validations using required,unique,true,minlength,custom validate function for gender.
- - API level validation on Patch request
+ - API level validation on Patch request.
+ - Never trust req.body
