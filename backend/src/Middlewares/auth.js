@@ -1,20 +1,21 @@
-const adminAuth=(req,res,next)=>{
-    const token=1234;
-    if(token!==1234){
-        res.status(401).send("Unauthorized admin");
-    } else{
-        next(); //if the token is valid, call next() to pass control to the next middleware or route handler
+const jwt=require("jsonwebtoken");
+const User=require("../models/user")
+const userAuth=async(req,res,next)=>{
+    const token=req.cookies.token;
+    if(!token){
+        throw new Error("No token provided");
     }
-}
-const userAuth=(req,res,next)=>{
-    const token=12345;
-    if(token!==12345){
-        res.status(401).send("Unauthorized user");
-
+    const validtoken=await jwt.verify(token,"dev@tinder$2827");
+    const{id}=validtoken;
+    const user=await User.findById(id);
+    if(!user){
+        res.status(401).send("User not found");
     }else{
+        req.user=user;
+        console.log(user);
         next();
     }
 }
 module.exports={
-    adminAuth,userAuth
+    userAuth
 }

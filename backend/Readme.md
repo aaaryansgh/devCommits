@@ -11,6 +11,9 @@
  - Installed validator.js
  - validate data in signup API
  - Installed bcrypt package
+ - Read cookies using cookie parser. (npm i cookie-parser)
+ - Created userAuth middleware
+ - Set the expiry of jwt token
 # Learnings:
  - Orders of routes matter.
  - HTTPs methods (GET,POST,PUT,PATCH,DELETE).
@@ -27,3 +30,4 @@
  - Data validations using required,unique,true,minlength,custom validate function for gender.
  - API level validation on Patch request.
  - Never trust req.body
+ 

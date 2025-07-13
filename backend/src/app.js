@@ -3,8 +3,14 @@ const app=express(); //creating an instance of express.js
 const connectDB=require("./config/db");
 const {validateUser}=require("./utils/validation")
 const User=require("./models/user")
-const bcrypt=require("bcrypt")
+const bcrypt=require("bcrypt");
+const cookieParser = require("cookie-parser");
+const jwt=require("jsonwebtoken");
+const {userAuth}=require("./Middlewares/auth")
+
 app.use(express.json()); //to parse JSON data in request body
+app.use(cookieParser()); // to parse cookies in request
+
 
 app.post("/signup",async(req,res)=>{
     validateUser(req);
@@ -32,59 +38,28 @@ app.get("/login",async(req,res)=>{
     try{
         const user=await User.findOne({email:email});
         if(!user){
-            res.send("invalid credentials")
+            res.send("invalid credential")
         }
         const isMatch=await bcrypt.compare(password,user.password)
         if(isMatch){
-            res.send("Login successful")
+            // Create a JWT token
+            const token=await jwt.sign({id:user._id},"dev@tinder$2827",{expiresIn:"1d"});
+            // Add the token to cookie and send the response back to user
+            res.cookie("token",token,{httpOnly:true});
+            res.send("Login successful: "+token)
         }else{
             res.send("Invalid credentials")
         }
     }catch(err){
         res.status(400).send("Error logging in: " + err.message);
-    }
-    
+    }   
 })
-//find user by email
-app.get("/user",async(req,res)=>{
-    const userEmail=req.body.email;
-    try{
-        const user=User.find({email:userEmail}) //will give me all user having that email id
-        res.send(user);
-    }catch(err){
-        res.send(err.message)
-    }
+app.get("/profile",userAuth, async(req,res)=>{
+    const {user}=req;
+    res.send(user);
 })
-app.get("/feed",async(req,res)=>{
-    try{
-        const user=await User.find({}) //will give me all user having that email id
-        res.send(user);
-    }catch(err){
-        res.send(err.message)
-    }
-})
-app.delete("/user",async(req,res)=>{
-    const userid=req.body._id;
-    try{
-        const user=await User.findByIdAndDelete({_id:userid})
-        if(user){
-            res.status(200).send("User deleted successfully");
-        }else{
-            res.status(404).send("User not found");
-        }
-    }catch(err){
-        res.status(400).send(err.message)
-    }
-})
-app.patch("/user",async(req,res)=>{
-    const userid=req.body._id;
-    const updateData=req.body;
-    try{
-        const user=await User.findByIdAndUpdate({_id:userid},updateData,{runValidators:true})
-        res.send("User updated successfully");
-    }catch(err){
-        res.status(400).send(err.message)
-    }
+app.post("/sendconnection",userAuth,async(req,res)=>{
+    res.send("Connection request sent");
 })
 
 connectDB().then(()=>{
