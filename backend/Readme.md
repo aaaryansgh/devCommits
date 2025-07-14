@@ -13,7 +13,25 @@
  - Installed bcrypt package
  - Read cookies using cookie parser. (npm i cookie-parser)
  - Created userAuth middleware
- - Set the expiry of jwt token
+ - Set the expiry of jwt token.
+ - API list:
+   ## auth router:
+     1. - POST/signup
+     2. - POST/login
+     3. - POST/logout
+   ## profile router:
+     4. - GET/profile/view
+     5. - PATCH/profile/edit
+     6. - PATCH/profile/password
+   ## connectionRequest router:
+     7. - POST/request/send/like/:id
+     8. - POST/request/send/pass/:id
+     9. - POST/request/review/accepted/:id
+     10. - POST/request/review/rejected/:id
+   ## user router:
+     11. - GET/user/connections
+     12. - GET/user/requests
+     13. - GET/user/feed
 # Learnings:
  - Orders of routes matter.
  - HTTPs methods (GET,POST,PUT,PATCH,DELETE).

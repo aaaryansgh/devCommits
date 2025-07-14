@@ -1,11 +1,12 @@
 const jwt=require("jsonwebtoken");
 const User=require("../models/user")
 const userAuth=async(req,res,next)=>{
-    const token=req.cookies.token;
+    const cookie=req.cookies;
+    const {token}=cookie;
     if(!token){
         throw new Error("No token provided");
     }
-    const validtoken=await jwt.verify(token,"dev@tinder$2827");
+    const validtoken=await jwt.verify(token,"devtinder@2827");
     const{id}=validtoken;
     const user=await User.findById(id);
     if(!user){
