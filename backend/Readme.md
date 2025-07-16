@@ -32,6 +32,9 @@
      11. - GET/user/connections
      12. - GET/user/requests
      13. - GET/user/feed
+  - Created Connection request schema for requests api.
+  - Sent conenction request api.
+  - Handled the corner cases for request API.
 # Learnings:
  - Orders of routes matter.
  - HTTPs methods (GET,POST,PUT,PATCH,DELETE).
@@ -48,4 +51,7 @@
  - Data validations using required,unique,true,minlength,custom validate function for gender.
  - API level validation on Patch request.
  - Never trust req.body
+ - $or query
+ - Compund indexes
+ - Schema.pre()
  

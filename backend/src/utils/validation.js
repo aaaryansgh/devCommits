@@ -18,4 +18,10 @@ const validateeditdata=(req)=>{
     const isEditAllowed=Object.keys(req.body).every(field=>allowedFields.includes(field))
     return isEditAllowed;
 }
+const validateeditpssword=(req)=>{
+    const {oldPassword,newPassword}=req.body;
+    if(!oldPassword || !newPassword){
+        throw new Error("Both old and new passwords are required");
+    }
+}
 module.exports={validateUser,validateeditdata}

@@ -24,5 +24,23 @@ profileRouter.patch("/profile/edit",userAuth,async(req,res)=>{
         res.status(400).send(err.message);
     }
 })
+profileRouter.patch("/profile/edit/password",userAuth,async(req,res)=>{
+    const {oldPassword,newPassword}=req.body;
+    try{
+        const {user}=req;
+        const isMatch=await bcrypt.compare(oldPassword,user.password);
+        if(!isMatch){
+            throw new Error("Old password is incorrect");
+        }else{
+            user.password=await bcrypt.hash(newPassword,10);
+            await user.save();
+            res.json({
+                message:"Password updated successfully"
+            });
+        }
+    }catch(err){
+        res.status(400).send(err.message);
+    }
+})
 
 module.exports = profileRouter;

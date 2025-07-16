@@ -5,13 +5,17 @@ const authRouter=express.Router();
 const User=require("../models/user")
 
 authRouter.post("/signup",async(req,res)=>{ 
-    const {firstName,lastName,email,password}=req.body;
+    const {firstName,lastName,email,password,age,gender,bio,skills}=req.body;
     const hashpassword=await bcrypt.hash(password,10);
     const user=new User({
         firstName,
         lastName,
         email,
-        password:hashpassword
+        password:hashpassword,
+        age,
+        gender,
+        bio,
+        skills
     }) 
     try{
         await user.save();
