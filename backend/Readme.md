@@ -54,4 +54,5 @@
  - $or query
  - Compund indexes
  - Schema.pre()
+ - Thought process: POST vs GET
  
