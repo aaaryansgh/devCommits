@@ -55,4 +55,5 @@
  - Compund indexes
  - Schema.pre()
  - Thought process: POST vs GET
+ - .skip() & .limit()
  

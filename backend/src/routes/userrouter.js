@@ -2,6 +2,7 @@ const express=require("express");
 const userRouter=express.Router();
 const {userAuth}=require("../Middlewares/auth");
 const ConnectionRequestModel = require("../models/connectionRqst");
+const User = require("../models/user");
 userRouter.get("/user/requests/recieved",userAuth,async(req,res)=>{
     const {user}=req;
     try{
@@ -38,4 +39,36 @@ userRouter.get("/user/requests/connected",userAuth,async(req,res)=>{
     }
 })
 
+userRouter.get("/feed",userAuth,async(req,res)=>{
+    
+    try{
+      const {user}=req;
+      const page=parseInt(req.query.page)||1
+      const limit=parseInt(req.query.limit)||10
+      limit=limit>50?50:limit;
+      const skip=(page-1)*limit;
+
+      const connection=await ConnectionRequestModel.find({
+        $or:[
+            {fromUserId:user._id},{toUserId:user._id}
+        ]
+      }).select("fromUserId toUserId").populate("fromUserId",["firstName","lastName"])
+      .populate("toUserId",["firstName","lastName"])
+      const hideUsers=new Set();
+      connection.forEach((req)=>{
+        hideUsers.add(req.fromUserId._id.toString());
+        hideUsers.add(req.toUserId._id.toString())
+      })
+      console.log(hideUsers);
+      const userconnection=await User.find({
+         $and:[
+            {_id: {$nin: Array.from(hideUsers)}},
+            {_id: {$ne: user._id}}
+         ] //all the users who is not in the hideUsers
+      }).select('firstName lastName bio skills').skip().limit(limit)
+      res.json({data:userconnection})
+    }catch(err){
+        res.status(500).send(err.message);
+    }
+})
 module.exports=userRouter;
