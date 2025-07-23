@@ -2,7 +2,12 @@ const express=require("express");
 const app=express(); //creating an instance of express.js
 const connectDB=require("./config/db");
 const cookieParser = require("cookie-parser");
+const cors=require("cors")
 
+app.use(cors({
+    origin:"http://localhost:5173",
+    credentials:true,
+}))
 app.use(express.json()); //to parse JSON data in request body
 app.use(cookieParser()); // to parse cookies in request
 
