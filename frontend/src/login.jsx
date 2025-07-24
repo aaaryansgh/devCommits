@@ -7,18 +7,19 @@ import { BASE_URL } from './utils/constants';
 const Login = () => {
   const [email, setEmailid]=useState("");
   const [password,setPassword]=useState("");
+  const [error,setError]=useState("")
   const navigate=useNavigate();
   const dispatch=useDispatch();
   const handleLogin=async()=>{
     try{
-      const result=await axios.post(BASE_URL+"/",{
+      const result=await axios.post(BASE_URL+"/login",{
         email,password,
     },{withCredentials:true})
     console.log(result.data);
     dispatch(addUser(result.data))
     navigate("/")
     }catch(err){
-      console.error(err);
+      setError(err?.response?.data);
     }
     
   }
@@ -39,6 +40,7 @@ const Login = () => {
         <button className="btn bg-sky-950 " onClick={handleLogin}>Login</button>
       </div>
     </div>
+    <p className='text-red-600'>{error}</p>
     
   </div>
 </div>

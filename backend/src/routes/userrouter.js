@@ -43,11 +43,6 @@ userRouter.get("/feed",userAuth,async(req,res)=>{
     
     try{
       const {user}=req;
-      const page=parseInt(req.query.page)||1
-      const limit=parseInt(req.query.limit)||10
-      limit=limit>50?50:limit;
-      const skip=(page-1)*limit;
-
       const connection=await ConnectionRequestModel.find({
         $or:[
             {fromUserId:user._id},{toUserId:user._id}
@@ -65,7 +60,7 @@ userRouter.get("/feed",userAuth,async(req,res)=>{
             {_id: {$nin: Array.from(hideUsers)}},
             {_id: {$ne: user._id}}
          ] //all the users who is not in the hideUsers
-      }).select('firstName lastName bio skills').skip().limit(limit)
+      }).select('firstName lastName bio skills age gender')
       res.json({data:userconnection})
     }catch(err){
         res.status(500).send(err.message);

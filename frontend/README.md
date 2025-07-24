@@ -9,6 +9,7 @@
  - Installed redux toolkit
  - LOgin and see if your data is coming in redux store.
  - Navbar should update as soon as user login
+ - Built logout feature
 
 # Body:
  - Navbar
