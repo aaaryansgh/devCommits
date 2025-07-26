@@ -7,6 +7,10 @@ const Navbar = () => {
   const user= useSelector((store)=>store.user);
   const dispatch=useDispatch();
   const navigate=useNavigate();
+  const connection= useSelector((store)=>store.connection);
+  const connectionLength=connection?.length;
+  const requests=useSelector((store)=>store.requests);
+  const requestslength=requests?.length;
   const handleLogout=async()=>{
     try{
       await axios.post(
@@ -23,7 +27,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-300 shadow-sm">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl"><span className='text-pink-500'>DEV</span>COMMITS</a>
+        <Link to="/" className="btn btn-ghost text-xl"><span className='text-pink-500'>DEV</span>COMMITS</Link>
       </div>
       <div className="flex gap-2">
         {user?(
@@ -42,7 +46,8 @@ const Navbar = () => {
             <span className="badge">New</span>
           </Link>
         </li>
-        <li><a>Settings</a></li>
+        <li><Link to="/connections">Connections <span className="badge  badge-success">{connectionLength}</span></Link></li>
+        <li><Link to="/requests">Requests <span className="badge  badge-success">{requestslength}</span></Link></li>
         <li><Link onClick={handleLogout}>Logout</Link></li>
       </ul>
     </div>

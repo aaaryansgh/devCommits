@@ -10,7 +10,6 @@ import { addUser } from './utils/userSlice'
 const Body = () => {
   const dispatch=useDispatch();
   const navigate=useNavigate();
-  
   const fetchUser=async()=>{
     try{
        const userprofile=await axios.get(BASE_URL+"/profile/view",{withCredentials:true})

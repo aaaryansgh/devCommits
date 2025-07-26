@@ -21,8 +21,10 @@ const Feed = () => {
     getFeed()
   },[])
   return feed&& (
-    <div className='flex justify-center my-5 '>
-      <Usercard user={feed[0]} />
+    <div className='flex justify-center my-5 space-x-5 flex-wrap '>
+      {feed.map(user=>(
+        <Usercard user={user} key={user._id} />
+      ))}
     </div>
   )
 }

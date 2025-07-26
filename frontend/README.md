@@ -10,7 +10,9 @@
  - LOgin and see if your data is coming in redux store.
  - Navbar should update as soon as user login
  - Built logout feature
-
+- Build connections page
+- Build request page
+- Build feature for accepting/rejecting request.
 # Body:
  - Navbar
  - Route=/ => Feed
