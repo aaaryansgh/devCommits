@@ -24,7 +24,7 @@ const Body = () => {
     fetchUser();
   },[])
   return (
-    <div>
+    <div className='bg-black min-h-screen'>
       <Navbar />
       <Outlet />
       <Footer />

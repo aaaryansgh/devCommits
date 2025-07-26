@@ -7,8 +7,6 @@ import Usercard from './Usercard'
 const Feed = () => {
   const dispatch=useDispatch();
   const feed=useSelector((store)=>store.feed)
-  console.log(feed);
-  
   const getFeed=async()=>{
     try{
        const res=await axios.get(BASE_URL+"/feed",{withCredentials:true});
@@ -20,11 +18,10 @@ const Feed = () => {
   useEffect(()=>{
     getFeed()
   },[])
+  if(feed?.length===0) return <div className='flex justify-center mt-20'>No users found</div>
   return feed&& (
-    <div className='flex justify-center my-5 space-x-5 flex-wrap '>
-      {feed.map(user=>(
-        <Usercard user={user} key={user._id} />
-      ))}
+    <div className='flex justify-center mt-20 flex-wrap '>
+        <Usercard user={feed[0]} />
     </div>
   )
 }

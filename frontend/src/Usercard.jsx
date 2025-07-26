@@ -10,7 +10,6 @@ const Usercard = ({user}) => {
       try{
         const res=await axios.post(BASE_URL+`/request/send/${status}/${_id}`,{
         },{withCredentials:true})
-        console.log(res);
         dispatch(removeFeed(_id));
       }catch(err){
         console.log(err);
@@ -18,7 +17,7 @@ const Usercard = ({user}) => {
       }
     }
   return (
-    <div className="card card-border border-pink-500 bg-base-300 w-96">
+    <div className="card card-border border-pink-500 bg-transparent w-96">
       <div className="card-body">
         <h2 className="card-title">{firstName} {lastName}' <span>{age?age:"21"}</span></h2>
         <p>{bio}</p>

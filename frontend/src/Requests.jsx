@@ -21,7 +21,11 @@ const Requests = () => {
         viewRequests()
     },[])
     if(!requests || requests.length === 0) {
-        return <div className="text-center my-5">No connection requests available.</div>;
+        return (
+          <div role="alert" className="alert alert-info alert-soft w-1/2 mx-auto mt-10">
+            <span>No request available</span>
+          </div>
+        )
     }
     const reviewrequest=async(status,_id)=>{
       try{
@@ -36,8 +40,9 @@ const Requests = () => {
       }
     }
   return (
-   <div className="card card-border border-pink-500 bg-base-300 m-3 w-66">
+   <div className='flex flex-wrap justify-start'>
     {requests?.map((request)=>(
+      <div className="card card-border border-pink-500 bg-base-300 m-3 w-66">
         <div className="card-body">
         <h2 className="card-title">{request.fromUserId.firstName} {request.fromUserId.lastName}</h2>
         <p>{request.fromUserId.bio}</p>
@@ -47,8 +52,10 @@ const Requests = () => {
           <button onClick={()=>reviewrequest("accepted",request._id)} className="btn hover:bg-pink-500">Accept ✅</button>
         </div>
        </div>
+      </div>
     ))}  
     </div>
+    
   )
 }
 

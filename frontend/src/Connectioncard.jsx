@@ -3,7 +3,7 @@ import React from 'react'
 const Connectioncard = ({conn}) => {
     const {firstName,lastName,bio,skills}=conn;
   return (
-    <div className="card card-border border-success bg-base-300  w-56">
+    <div className="card card-border border-success bg-transparent  w-56">
       <div className="card-body">
         <h2 className="card-title">{firstName} {lastName}</h2>
         <p className='italic'>{bio}</p>

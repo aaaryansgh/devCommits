@@ -7,7 +7,6 @@ import Connectioncard from './Connectioncard'
 
 const Connections = () => {
     const connections=useSelector((store)=>store.connection)
-    console.log(connections);
     const dispatch=useDispatch();
     const fetchConnection=async()=>{
         const res=await axios.get(BASE_URL+"/user/requests/connected",{withCredentials:true})

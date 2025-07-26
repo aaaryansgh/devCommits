@@ -25,7 +25,7 @@ const Navbar = () => {
     }
   }
   return (
-    <div className="navbar bg-base-300 shadow-sm">
+    <div className="navbar bg-black shadow-sm">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-xl"><span className='text-pink-500'>DEV</span>COMMITS</Link>
       </div>
@@ -43,7 +43,6 @@ const Navbar = () => {
         <li>
           <Link to="/profile" className="justify-between">
             Profile
-            <span className="badge">New</span>
           </Link>
         </li>
         <li><Link to="/connections">Connections <span className="badge  badge-success">{connectionLength}</span></Link></li>
