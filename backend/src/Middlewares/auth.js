@@ -4,7 +4,7 @@ const userAuth=async(req,res,next)=>{
     const cookie=req.cookies;
     const {token}=cookie;
     if(!token){
-        throw new Error("No token provided");
+        throw new Error("Please login");
     }
     const validtoken=await jwt.verify(token,"devtinder@2827");
     const{id}=validtoken;
