@@ -15,7 +15,7 @@ const Connections = () => {
     useEffect(()=>{
         fetchConnection();
     },[])
-    if(connections.length===0){
+    if(connections?.length===0){
       return (
         <div className='flex justify-center items-center h-screen'>
           <h1 className='text-2xl font-bold'>No Connections Found</h1>
