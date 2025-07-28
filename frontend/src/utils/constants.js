@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://dev-commits-p4nk.vercel.app/';
+export const BASE_URL = 'https://dev-commits-p4nk.vercel.app';
