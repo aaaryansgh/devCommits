@@ -6,7 +6,7 @@ const userAuth=async(req,res,next)=>{
     if(!token){
         throw new Error("Please login");
     }
-    const validtoken=await jwt.verify(token,"devtinder@2827");
+    const validtoken=await jwt.verify(token,process.env.JWT_SECRET);
     const{id}=validtoken;
     const user=await User.findById(id);
     if(!user){

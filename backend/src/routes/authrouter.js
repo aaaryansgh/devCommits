@@ -3,6 +3,32 @@ const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
 const authRouter=express.Router();
 const User=require("../models/user")
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.APP_MAIL, // Use your email address
+    pass: process.env.APP_PASS, // Use an app password if 2FA is enabled
+  }
+});
+
+const sendWelcomeEmail = async (userEmail, userName) => {
+  const mailOptions = {
+    from: "aryan2send@gmail.com",
+    to: userEmail,
+    subject: 'Welcome to Our App!',
+    html: `<h2>Hello ${userName},</h2><p>Thanks for signing up!</p>`
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully');
+  } catch (error) {
+    console.error('Error sending email:', error);
+  }
+};
+
 
 authRouter.post("/signup",async(req,res)=>{ 
     const {firstName,lastName,email,password,age,gender,bio,skills}=req.body;
@@ -19,6 +45,7 @@ authRouter.post("/signup",async(req,res)=>{
     }) 
     try{
         await user.save();
+        await sendWelcomeEmail(email, firstName);
         res.status(201).send("user created successfully")
     }catch(err){
         res.status(400).send(err.message);

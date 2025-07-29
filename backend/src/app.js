@@ -1,8 +1,10 @@
+require("dotenv").config(); 
 const express=require("express");
 const app=express(); //creating an instance of express.js
 const connectDB=require("./config/db");
 const cookieParser = require("cookie-parser");
 const cors=require("cors")
+require("dotenv").config(); //to use environment variables from .env file
 
 app.use(cors({
     origin:"http://localhost:5173",
@@ -29,3 +31,6 @@ connectDB().then(()=>{
 }).catch((err)=>{
     console.error("Database connection failed:", err);
 })
+
+
+//cxvp ywrb vieq kibz
