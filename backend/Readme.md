@@ -35,6 +35,7 @@
   - Created Connection request schema for requests api.
   - Sent conenction request api.
   - Handled the corner cases for request API.
+  - Installed node-cron (npm i node-cron)
 # Learnings:
  - Orders of routes matter.
  - HTTPs methods (GET,POST,PUT,PATCH,DELETE).
@@ -56,4 +57,13 @@
  - Schema.pre()
  - Thought process: POST vs GET
  - .skip() & .limit()
+ 
+# Scheduling cron jobs in NodeJS
+ - Installing node-cron
+ - Learning about cron expression
+ - Schedule a job
+ - date-fns
+ - Find all the unique email id and have got connection Request in previous day
+ - Send Email
+ - Explore queue mechanim to send bulk emails
  

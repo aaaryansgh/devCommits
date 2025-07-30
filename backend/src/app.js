@@ -4,7 +4,7 @@ const app=express(); //creating an instance of express.js
 const connectDB=require("./config/db");
 const cookieParser = require("cookie-parser");
 const cors=require("cors")
-require("dotenv").config(); //to use environment variables from .env file
+ require("./utils/cronjob")
 
 app.use(cors({
     origin:"http://localhost:5173",
