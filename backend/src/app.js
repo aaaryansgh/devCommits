@@ -4,6 +4,9 @@ const app=express(); //creating an instance of express.js
 const connectDB=require("./config/db");
 const cookieParser = require("cookie-parser");
 const cors=require("cors")
+const http=require("http")
+
+
  require("./utils/cronjob")
 
 app.use(cors({
@@ -17,15 +20,21 @@ const authRouter=require("./routes/authrouter");
 const profileRouter=require("./routes/profilerouter");
 const requestRouter=require("./routes/requestrouter");
 const userRouter = require("./routes/userrouter");
+const chatRouter=require("./routes/chatRouter");
+const intializeSocket = require("./utils/socket");
 
 app.use("/",authRouter);
 app.use("/",profileRouter);
 app.use("/",requestRouter)
 app.use("/",userRouter);
+app.use("/",chatRouter)
+
+const server=http.createServer(app)
+intializeSocket(server);
 
 connectDB().then(()=>{
     console.log("Database connected successfully");
-    app.listen(4000,()=>{
+    server.listen(4000,()=>{
         console.log("Server is running on port 4000");
     })
 }).catch((err)=>{

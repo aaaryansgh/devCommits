@@ -8,6 +8,7 @@ import Profile from "./Profile"
 import Connections from "./Connections"
 import Requests from "./Requests"
 import Signup from "./Signup"
+import Chat from "./Chat"
 function App() {
   
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/connections" element={<Connections />}/>
           <Route path="/requests" element={<Requests />}/>
           <Route path="/signup" element={<Signup />}/>
+          <Route path="/chat/:id/:name" element={<Chat />}/>
         </Route>
       </Routes>
     </BrowserRouter>

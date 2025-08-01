@@ -43,4 +43,14 @@
        - pm2 logs
        - pm2 list, pm2 flush, pm2 stop, pm2 delete
        - config nginx- /etc/nginx/sites-available/default
-       
+#  Websockets & socket.io
+   - Build UI for a chat window on /chat/:id
+   - Setup socket.io in backend
+   - npm i socket.io
+   - setup frontend socket.io-client
+   - Initialise the chat
+   - createSocketConnection
+   - Listen to events
+   - Secured room ID using crypto library
+   - Fixed security bug
+   - Show green dot when both user is in the room
