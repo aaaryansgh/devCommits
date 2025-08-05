@@ -51,10 +51,13 @@ userRouter.get("/feed",userAuth,async(req,res)=>{
       .populate("toUserId",["firstName","lastName"])
       const hideUsers=new Set();
       connection.forEach((req)=>{
-        hideUsers.add(req.fromUserId._id.toString());
-        hideUsers.add(req.toUserId._id.toString())
+        if (req.fromUserId && req.fromUserId._id) {
+            hideUsers.add(req.fromUserId._id.toString());
+        }
+        if (req.toUserId && req.toUserId._id) {
+            hideUsers.add(req.toUserId._id.toString());
+        }
       })
-      console.log(hideUsers);
       const userconnection=await User.find({
          $and:[
             {_id: {$nin: Array.from(hideUsers)}},
